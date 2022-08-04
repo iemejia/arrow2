@@ -1,9 +1,9 @@
-use arrow2::chunk::Chunk;
-use avro_rs::types::{Record, Value};
-use avro_rs::{Codec, Writer};
-use avro_rs::{Days, Decimal, Duration, Millis, Months, Schema as AvroSchema};
+use apache_avro::types::{Record, Value};
+use apache_avro::{Codec, Writer};
+use apache_avro::{Days, Decimal, Duration, Millis, Months, Schema as AvroSchema};
 
 use arrow2::array::*;
+use arrow2::chunk::Chunk;
 use arrow2::datatypes::*;
 use arrow2::error::Result;
 use arrow2::io::avro::read;
@@ -120,7 +120,7 @@ pub(super) fn data() -> Chunk<Box<dyn Array>> {
     Chunk::try_new(columns).unwrap()
 }
 
-pub(super) fn write_avro(codec: Codec) -> std::result::Result<Vec<u8>, avro_rs::Error> {
+pub(super) fn write_avro(codec: Codec) -> std::result::Result<Vec<u8>, apache_avro::Error> {
     let (avro, _) = schema();
     // a writer needs a schema and something to write to
     let mut writer = Writer::with_codec(&avro, Vec::new(), codec);
@@ -138,9 +138,9 @@ pub(super) fn write_avro(codec: Codec) -> std::result::Result<Vec<u8>, avro_rs::
     record.put(
         "h",
         Value::Array(vec![
-            Value::Union(Box::new(Value::Int(1))),
-            Value::Union(Box::new(Value::Null)),
-            Value::Union(Box::new(Value::Int(3))),
+            Value::Union(1, Box::new(Value::Int(1))),
+            Value::Union(2, Box::new(Value::Null)),
+            Value::Union(3, Box::new(Value::Int(3))),
         ]),
     );
     record.put(
@@ -170,9 +170,9 @@ pub(super) fn write_avro(codec: Codec) -> std::result::Result<Vec<u8>, avro_rs::
     record.put(
         "h",
         Value::Array(vec![
-            Value::Union(Box::new(Value::Int(1))),
-            Value::Union(Box::new(Value::Null)),
-            Value::Union(Box::new(Value::Int(3))),
+            Value::Union(1, Box::new(Value::Int(1))),
+            Value::Union(2, Box::new(Value::Null)),
+            Value::Union(3, Box::new(Value::Int(3))),
         ]),
     );
     record.put(

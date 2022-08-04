@@ -107,7 +107,7 @@ tokio = { version = "1", features = ["macros", "rt", "fs", "io-util"] }
 tokio-util = { version = "0.6", features = ["compat"] }
 # used to run formal property testing
 proptest = { version = "1", default_features = false, features = ["std"] }
-avro-rs = { version = "0.13", features = ["snappy"] }
+apache-avro = { version = "0.14.0", features = ["snappy"] }
 # use for flaky testing
 rand = "0.8"
 

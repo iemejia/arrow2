@@ -1,4 +1,4 @@
-use avro_rs::Codec;
+use apache_avro::Codec;
 
 use futures::pin_mut;
 use futures::StreamExt;

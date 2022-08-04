@@ -1,12 +1,12 @@
 use std::io::Cursor;
 
-use avro_rs::types::Record;
+use apache_avro::types::Record;
 use criterion::*;
 
+use apache_avro::*;
+use apache_avro::{Codec, Schema as AvroSchema};
 use arrow2::error::Result;
 use arrow2::io::avro::read;
-use avro_rs::*;
-use avro_rs::{Codec, Schema as AvroSchema};
 
 fn schema() -> AvroSchema {
     let raw_schema = r#"
